@@ -52,35 +52,10 @@ int main(int argc, char *argv[]) {
     }
 
 
-    FILE *day;
-    char fileLoc[100];
-    int noTalk = 0;
-    printf("How was your day? Please write about and give me the file location!\n");
-    while(!(day = fopen(fileLoc, "r"))) {
-        scanf("%s", fileLoc);
-        noTalk++;
-
-        if(noTalk < 5 && !(day = fopen(fileLoc, "r"))) {
-            printf("I can't find the file you specified %s!\n",name);
-        } else if(noTalk >= 5) {
-            printf("I still can't find the file. Would you prefer not to talk about your day? Y/N\n");
-            char str1[100];
-            scanf("%s", str1);
-            if(!strcmp(str1, "Y") || !strcmp(str1,"y")) {
-                break;
-            }
-            printf("Ok, give me the file location again please!\n");
-            noTalk = 0;
-        }
-
-    }
-
-    if(noTalk >= 5) {
-        printf("It's ok %s, you don't have to tell me if you don't want to. Would you rather talk about something else?\n", name);
-    } else {
-
-        dayResponse(day);
-    }
+    printf("How was your day? Please write about it and give me the file location!\n");
+    getFileForType(DAY);
+    printf("How are you feeling today? Please write about it and give me the file location!\n");
+    getFileForType(FEEL);
 
     return 0;
 
