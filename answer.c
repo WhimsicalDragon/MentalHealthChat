@@ -25,23 +25,56 @@ void dayResponse(FILE *day) {
 }
 
 
+void feelResponse(FILE *feel) {
+
+    char feelStr[7000];
+    while(!feof(feel)) {
+        char buffString[1000];
+        fgets(buffString, 1000, feel);
+        strcat(feelStr, buffString);
+    }
+
+    triggerStr(feelStr, FEEL);
+    fclose(feel);
+}
+
+
 void triggerStr(char* userStr, question qtype) {
-    char* foo[10];
-    foo[0] = "good";
-    foo[1] = "Good";
+    char* good[10];
+    good[0] = "good";
+    good[1] = "Good";
 
     //Future: Get for words from like api or something and use them!
 
     //int good = 0;
 
+    switch(qtype) {
+        case DAY:
+            for(int i = 0; i < 2; i++) {
+                if(strContains(userStr,good[i])) {
+                printf("I'm glad your day was good %s\n", name);
+                break;
+                }
+            }
+            break;
+        case FEEL:
+            for(int i = 0; i < 2; i++) {
+                if(strContains(userStr,good[i])) {
+                printf("I'm glad you are feeling good %s\n", name);
+                break;
+                }
+            }
+            break;
+        default:
+            for(int i = 0; i < 2; i++) {
+                if(strContains(userStr,good[i])) {
+                printf("Glad things are good %s\n", name);
+                break;
+                }
+            }
+            break;
 
-    for(int i = 0; i < 2; i++) {
-        if(strContains(userStr,foo[i])) {
-            printf("I'm glad your day was good %s\n", name);
-        }
     }
-
-
 }
 
 //Return types
@@ -51,14 +84,19 @@ void triggerStr(char* userStr, question qtype) {
 int getFileForType(question qtype) {
     FILE *file;
     char fileLoc[100];
-    strcpy(fileLoc, "");
     int noTalk = 0;
-    while(!(file = fopen(fileLoc, "r"))) {
+    strcpy(fileLoc, "");
+    while(noTalk < 2 && !(file = fopen(fileLoc, "r"))) {
+        strcpy(fileLoc, "");
         scanf("%s", fileLoc);
         noTalk++;
+
+
+        printf("File loc is %s\n", fileLoc);
+
         if(noTalk < 2 && !(file = fopen(fileLoc, "r"))) {
             printf("I can't find the file you specified %s!\n",name);
-        } else if(noTalk >= 2) {
+        } else if(noTalk >= 2 && !(file = fopen(fileLoc, "r"))) {
 
 
             switch(qtype) {
@@ -77,8 +115,12 @@ int getFileForType(question qtype) {
             scanf(" %c", &resp);
             if(resp == 'Y' || resp == 'y') {
                 break;
+            } else {
+                fflush(stdin);
+                printf("Ok, give me the file location again please!\n");
+                noTalk = 0;
             }
-            printf("Ok, give me the file location again please!\n");
+        } else if((file = fopen(fileLoc, "r"))) {
             noTalk = 0;
         }
 
@@ -96,8 +138,15 @@ int getFileForType(question qtype) {
             return -1;
         }
     } else {
-        if(qtype == DAY) {
-            dayResponse(file);
+        switch(qtype) {
+            case DAY:
+                dayResponse(file);
+                break;
+            case FEEL:
+                feelResponse(file);
+                break;
+            default:
+                break;
         }
         return 1;
     }

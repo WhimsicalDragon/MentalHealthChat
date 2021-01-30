@@ -12,6 +12,8 @@ typedef enum {
 
 void dayResponse(FILE *day);
 
+void feelResponse(FILE *feel);
+
 void triggerStr(char* userStr, question);
 
 int getFileForType(question);
