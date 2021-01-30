@@ -61,10 +61,16 @@ int getFileForType(question qtype) {
         } else if(noTalk >= 2) {
 
 
-            if(qtype == DAY) {
-                printf("I still can't find the file. Would you prefer not to talk about your day? Y/N\n");
-            } else {
-                printf("I still can't find the file. Would you prefer not to talk about this? Y/N\n");
+            switch(qtype) {
+                case DAY:
+                    printf("I still can't find the file. Would you prefer not to talk about your day? Y/N\n");
+                    break;
+                case FEEL:
+                    printf("I still can't find the file. Would you prefer not to talk about how you are feeling right now? Y/N\n");
+                    break;
+                default:
+                    printf("I still can't find the file. Would you prefer not to talk about this? Y/N\n");
+                    break;
             }
             char resp;
             fflush(stdin);

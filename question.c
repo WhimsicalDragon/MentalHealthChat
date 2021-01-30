@@ -53,9 +53,15 @@ int main(int argc, char *argv[]) {
 
 
     printf("How was your day? Please write about it and give me the file location!\n");
-    getFileForType(DAY);
+    if(getFileForType(DAY) == -1) {
+        printf("Ok, I am here when you are ready to talk.\n");
+        exit(0);
+    }
     printf("How are you feeling today? Please write about it and give me the file location!\n");
-    getFileForType(FEEL);
+    if(getFileForType(FEEL) == -1) {
+        printf("Ok, I am here when you are ready to talk.\n");
+        exit(0);
+    }
 
     return 0;
 
