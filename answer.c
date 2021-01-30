@@ -4,6 +4,10 @@
 #include "answer.h"
 #include "string_utils.h"
 
+extern char name[100];
+
+question qtype;
+
 void dayResponse(FILE *day) {
 
     printf("That's cool!\n");
@@ -19,7 +23,25 @@ void dayResponse(FILE *day) {
     printf("%s is what you said\n", dayStr);
 
 
-    char foo[] = "good";
 
-    printf("Strcontain says %d\n", strContains(dayStr,foo));
+    //printf("Strcontain says %d\n", strContains(dayStr,foo[0]));
+    triggerStr(dayStr, DAY);
+}
+
+
+void triggerStr(char* userStr, question qtype) {
+    char* foo[10];
+    foo[0] = "good";
+    foo[1] = "Good";
+
+    //int good = 0;
+
+
+    for(int i = 0; i < 2; i++) {
+        if(strContains(userStr,foo[i])) {
+            printf("I'm glad your day was good %s\n", name);
+        }
+    }
+
+
 }

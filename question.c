@@ -5,12 +5,16 @@
 #include "string_utils.h"
 //#include <time.h> Add time checking and remind for bedtime later
 
+question qtype;
+
+
+char name[100];
 
 int main(int argc, char *argv[]) {
 
     int tm_hour;
     FILE *userProfile;
-    char name[100];
+
 
     //Check if the user is new
     if(!(userProfile = fopen("userprofile.txt", "r"))) {
@@ -70,7 +74,6 @@ int main(int argc, char *argv[]) {
         }
 
     }
-
 
     if(noTalk >= 5) {
         printf("It's ok %s, you don't have to tell me if you don't want to. Would you rather talk about something else?\n", name);
