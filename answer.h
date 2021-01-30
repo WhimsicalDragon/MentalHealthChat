@@ -14,6 +14,8 @@ void dayResponse(FILE *day);
 
 void feelResponse(FILE *feel);
 
+int containsWordOrSyn(char** words, int n, char* userStr);
+
 void triggerStr(char* userStr, question);
 
 int getFileForType(question);

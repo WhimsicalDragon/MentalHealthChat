@@ -44,37 +44,41 @@ void triggerStr(char* userStr, question qtype) {
     good[0] = "good";
     good[1] = "Good";
 
-    //Future: Get for words from like api or something and use them!
-
-    //int good = 0;
+    //Future: Get synonyms from like api or something and use them!
 
     switch(qtype) {
         case DAY:
-            for(int i = 0; i < 2; i++) {
-                if(strContains(userStr,good[i])) {
+            if(containsWordOrSyn(good, 2, userStr)) {
                 printf("I'm glad your day was good %s\n", name);
-                break;
-                }
             }
             break;
         case FEEL:
-            for(int i = 0; i < 2; i++) {
-                if(strContains(userStr,good[i])) {
+            if(containsWordOrSyn(good, 2, userStr)) {
                 printf("I'm glad you are feeling good %s\n", name);
-                break;
-                }
             }
             break;
         default:
-            for(int i = 0; i < 2; i++) {
-                if(strContains(userStr,good[i])) {
+            if(containsWordOrSyn(good, 2, userStr)) {
                 printf("Glad things are good %s\n", name);
-                break;
-                }
             }
             break;
 
     }
+}
+
+
+
+int containsWordOrSyn(char** words, int n, char* userStr) {
+
+
+    for(int i = 0; i < n; i++) {
+        if(strContains(userStr,words[i])) {
+            return 1;
+        }
+    }
+
+    return 0;
+
 }
 
 //Return types
