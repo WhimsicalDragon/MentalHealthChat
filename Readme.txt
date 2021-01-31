@@ -1,1 +1,1 @@
-Wow there's nothing here!
+Turns out cool and interesting dialogue is both difficult to code and boring to write.
